@@ -19,6 +19,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -26,10 +27,17 @@ STATICFILES_DIRS = [
 SECRET_KEY = 'django-insecure-&z5!168)ip@$400%@grp*jtb+(^eu!8(6_4o!n@i_xbd#m^kic'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+      "climate-fj2r.vercel.app",
+    ".vercel.app",
+    "127.0.0.1",
+    "localhost",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://climate-fj2r.vercel.app",
+]
 
 # Application definition
 
@@ -45,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -118,4 +127,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
