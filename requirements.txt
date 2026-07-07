@@ -1,5 +1,5 @@
 asgiref==3.9.1
-certifi==2026.6.15
+certifi
 charset-normalizer==3.4.3
 Django==6.0.6
 gunicorn==23.0.0
