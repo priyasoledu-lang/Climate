@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       {% load static %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"> -->
     <link rel="icon" href="{% static 'img/site-pic.ico' %}" type="image/icon type"/>
 <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
 <script src="{% static 'js/chartSetup.js' %}"></script>
@@ -13,16 +13,30 @@
 
     <title>Weather Forecast</title>
 </head>
-<body>
-    <main class="{{ description }}">
-        <section class="side-container">
+<body class="min-h-screen bg-black flex items-center justify-center p-4">
+    <main class="{{ description }} w-full max-w-6xl min-h-[650px] rounded-3xl overflow-hidden flex flex-col md:flex-row bg-cover bg-center shadow-2xl">
+    <!-- <main class="{{ description }} w-full max-w-6xl rounded-3xl overflow-hidden flex flex-col md:flex-row"> -->
+        <!-- <section class="w-full md:w-72 bg-white/15 backdrop-blur-xl p-6 border-b md:border-b-0 md:border-r border-white/30"> -->
+           <section class="w-full md:w-80
+bg-black/20
+backdrop-blur-2xl
+border-r border-white/10
+p-8
+flex
+flex-col">
             <form method="POST">
                 {% csrf_token %}
-                <div class="search-container">
+                <div class="flex items-center gap-3 border-b border-white pb-2">
                     <div style="width:22px;height:22px;color:white";class="weather-icon">
                      <i class="bi bi-cloud-fog"></i>
                     </div>
-                    <input type="text" name="city" class="geo-input" placeholder="Ex. Hyderabad" value="{{ location}}">
+                   <input
+    type="text"
+    name="city"
+    class="ml-3 flex-1 bg-transparent outline-none text-white placeholder:text-gray-300"
+    placeholder="Ex. Hyderabad"
+    value="{{ location }}">
+                    <!-- <input class="flex-1 bg-transparent outline-none text-white placeholder:text-white/60" type="text" name="city" class="geo-input" placeholder="Ex. Hyderabad" value="{{ location}}"> -->
                     <button class="search-button">
                         <div style="width:22px;height:25px;color:white";class="weather-icon">
                             <i class="bi bi-search"></i>    
@@ -31,11 +45,14 @@
                     </button>
                 </div>
             </form>
-            <div class="day-stats">
-                <h2 class="day-stats__temperature">
+            <!-- <div class="flex flex-col items-center mt-10 text-white">
+            <!-- <div class="day-stats"> -->
+                <!-- <h2 class="day-stats__temperature"> -->
+                    <!-- <h2 class="text-5xl md:text-6xl font-semibold text-white">
                     <span class="day-stats__temperature_value">{{ current_temp }}</span>°
-                </h2>
-                <h3 class="day-stats__feelslike">
+                </h2> -->
+                <!-- <h3 class="day-stats__feelslike"> -->
+                    <!-- <h3 class="text-lg font-light text-white mt-3">
                     Feels like:&nbsp&nbsp<span class="day-stats__feelslike_value">{{ feels_like }}</span>°
                 </h3>
                 <ul class="day-stats_condition">
@@ -53,26 +70,93 @@
                             of Clouds
                         </p>
                     </li>
-                </ul>
-            </div>
+                </ul> -->
+            <!-- </div> --> -->
             <!-- <img src="{% static 'img/side-blur.png' %}" class="side-blur"  alt="blur"> -->
+             <div class="grid grid-cols-2 gap-4 mt-10">
+
+    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 shadow-lg">
+        <i class="bi bi-droplet-fill text-blue-300 text-xl"></i>
+        <p class="text-gray-300 text-sm mt-2">Temperature</p>
+        <p class="text-2xl text-white font-semibold">{{temp1}}%</p>
+    </div>
+<!-- 
+    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 shadow-lg">
+        <i class="bi bi-cloud-fill text-gray-200 text-xl"></i>
+        <p class="text-gray-300 text-sm mt-2">Clouds</p>
+        <p class="text-2xl text-white font-semibold">{{ clouds }}%</p>
+    </div> -->
+
+    <!-- <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 shadow-lg">
+        <i class="bi bi-speedometer2 text-green-300 text-xl"></i>
+        <p class="text-gray-300 text-sm mt-2">Pressure</p>
+        <p class="text-2xl text-white font-semibold">{{ pressure }} hPa</p>
+    </div> -->
+
+    <!-- <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 shadow-lg">
+        <i class="bi bi-wind text-cyan-300"></i>
+        <p class="text-gray-300 text-sm mt-2">Wind</p>
+        <p class="text-2xl text-white font-semibold">{{ wind }} km/h</p>
+    </div> -->
+
+</div>
         </section>
-        <section class="main-container">
-            <h4 class="secondary-title">Weather Forecast</h4>
-            <h1 class="weather__primary-title">{{ description}}</h1>
-            <div class="weather__location">
-                <div style="width:15px;height:15px;color:white;"class="location">
+        <section class="flex-1 p-10 space-y-8">
+            <!-- <h4 class="secondary-title">Weather Forecast</h4> -->
+             <h4 class="text-sm
+uppercase
+tracking-[0.35em]
+font-semibold
+text-sky-300
+mb-2">
+    WEATHER FORECAST
+</h4>
+             <h1 class="text-5xl font-extrabold capitalize text-white leading-tight">
+{{ description }}
+</h1>
+        <!-- <h1 class="text-3xl md:text-5xl font-bold text-white mb-4"> {{ description}}</h1> -->
+            <!-- <div class="weather__location"> -->
+                <div class="flex items-center gap-3 mt-5 text-white">
+                <!-- <div style="width:15px;height:15px;color:white;"class="location"> -->
                     <i class="bi bi-geo-alt"></i>
                 </div>
             
-            <p class="weather__location-text">
-                <span class="weather__location-city">{{ city }}</span>
-                <span class="weather__location-country">{{ country }}</span>
-                <span class="weather__location-date">{{ time}}</span>
+            <!-- <p class="weather__location-text"> -->
+                <p class="font-semibold text-lg">
+                {{ city }},{{ country }}
+                <p class="text-sm text-gray-300">{{ time}}
+                    
             
             </p>
         </div>
-        <p class="weather__primary-stats">
+        <!-- <div class="grid grid-cols-2 gap-4 mt-8">
+
+<div class="glass-card">
+🌬 Wind
+<br>
+{{ wind }} km/h
+</div>
+
+<div class="glass-card">
+🌡 Pressure
+<br>
+{{ pressure }}
+</div>
+
+<div class="glass-card">
+👀 Visibility
+<br>
+{{ visibility }}
+</div>
+
+<div class="glass-card">
+🌡 Max Temp
+<br>
+{{ MaxTemp }}°
+</div>
+
+</div> -->
+        <!-- <p class="weather__primary-stats">
             Wind
             <span class="weatherWindKph">{{ wind }}</span> kilometers per hour.Pressure
             is<span class="weatherPressure">{{pressure}}</span>
@@ -80,9 +164,31 @@
             <span class="weatherMaxTemp">{{ MaxTemp }}</span>°.Minimum Temperature
             <span class="weatherMinTemp">{{ MinTemp }}</span>°
             
-        </p>
-        <ul class="forecast">
-            <li class="forecast-item">
+        </p> -->
+        <!-- <ul class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <li class="bg-white/10
+rounded-2xl
+backdrop-blur-xl
+text-center
+p-5
+hover:bg-white/20
+transition">
+
+<p class="text-gray-300">
+{{ time1 }}
+</p>
+
+<p class="text-3xl font-bold text-white">
+{{ temp1 }}°
+</p>
+
+<p class="text-sm text-gray-300">
+Humidity {{ hum1 }}%
+</p>
+
+</li> -->
+            <!-- <li class="forecast-item"> -->
+                <!-- <li class="flex flex-col items-center text-white bg-white/10 rounded-xl p-4 backdrop-blur-md">
                 <p class="forecast-time">{{ time1 }}</p>
                 <p class="forecast-temperature">
                     &nbsp;<span class="forecast-temperatureValue">
@@ -94,59 +200,237 @@
                 </p>
             </li>
             <!-- List 2 -->
-              <li class="forecast-item">
+              <!-- <li class="forecast-item">
                 <p class="forecast-time">{{ time2 }}</p>
                 <p class="forecast-temperature">
                     &nbsp;<span class="forecast-temperatureValue">
                         {{temp2}}
-                    </span>
-                </p>
+                    </span> -->
+                <!-- </p>
                 <p class="forecastWindText">
                     Humidity:<span class="forecast-humidityValue">{{ hum2}}</span>
                 </p>
-            </li>
+            </li> -->
             <!-- Closing of List2 -->
              <!-- List3 -->
-               <li class="forecast-item">
+               <!-- <li class="forecast-item">
                 <p class="forecast-time">{{ time3 }}</p>
                 <p class="forecast-temperature">
                     &nbsp;<span class="forecast-temperatureValue">
                         {{temp3}}
-                    </span>
-                </p>
+                    </span> -->
+                <!-- </p>
                 <p class="forecastWindText">
                     Humidity:<span class="forecast-humidityValue">{{ hum3}}</span>
                 </p>
-            </li>
+            </li> -->
               <!-- Closing of List3 -->
                <!-- List4 -->
-                 <li class="forecast-item">
+                 <!-- <li class="forecast-item">
                 <p class="forecast-time">{{ time4 }}</p>
                 <p class="forecast-temperature">
                     &nbsp;<span class="forecast-temperatureValue">
                         {{temp4}}
-                    </span>
-                </p>
+                    </span> -->
+                <!-- </p>
                 <p class="forecastWindText">
                     Humidity:<span class="forecast-humidityValue">{{ hum4}}</span>
                 </p>
-            </li>
+            </li> -->
                 <!-- Closing of List4 -->
                  <!-- List5 -->
-                   <li class="forecast-item">
+                   <!-- <li class="forecast-item">
                 <p class="forecast-time">{{ time5 }}</p>
                 <p class="forecast-temperature">
                     &nbsp;<span class="forecast-temperatureValue">
                         {{temp5}}
                     </span>
-                </p>
-                <p class="forecastWindText">
+                </p> -->
+                <!-- <p class="forecastWindText">
                     Humidity:<span class="forecast-humidityValue">{{ hum5}}</span>
                 </p>
-            </li>
+            </li> -->
                   <!-- Closing of List5 -->
-        </ul>
+        <!-- </ul> -->
+         <h3 class="text-xl font-semibold text-white mb-5">
+    Hourly Forecast
+</h3>
+
+<ul class="grid grid-cols-2 md:grid-cols-5 gap-5">
+
+    <!-- Card 1 -->
+    <li class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:scale-105 transition duration-300 text-center">
+
+        <p class="text-sm uppercase tracking-widest text-gray-300">
+            {{ time1 }}
+        </p>
+
+        <i class="bi bi-cloud-sun-fill text-4xl text-yellow-300 my-4"></i>
+
+        <p class="text-4xl font-bold text-white">
+            {{ temp1 }}°
+        </p>
+
+        <p class="text-sm text-gray-300 mt-2">
+            💧 {{ hum1 }}%
+        </p>
+
+    </li>
+
+    <!-- Card 2 -->
+    <li class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:scale-105 transition duration-300 text-center">
+
+        <p class="text-sm uppercase tracking-widest text-gray-300">
+            {{ time2 }}
+        </p>
+
+        <i class="bi bi-cloud-fill text-4xl text-gray-200 my-4"></i>
+
+        <p class="text-4xl font-bold text-white">
+            {{ temp2 }}°
+        </p>
+
+        <p class="text-sm text-gray-300 mt-2">
+            💧 {{ hum2 }}%
+        </p>
+
+    </li>
+
+    <!-- Card 3 -->
+    <li class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:scale-105 transition duration-300 text-center">
+
+        <p class="text-sm uppercase tracking-widest text-gray-300">
+            {{ time3 }}
+        </p>
+
+        <i class="bi bi-cloud-drizzle-fill text-4xl text-cyan-300 my-4"></i>
+
+        <p class="text-4xl font-bold text-white">
+            {{ temp3 }}°
+        </p>
+
+        <p class="text-sm text-gray-300 mt-2">
+            💧 {{ hum3 }}%
+        </p>
+
+    </li>
+
+    <!-- Card 4 -->
+    <li class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:scale-105 transition duration-300 text-center">
+
+        <p class="text-sm uppercase tracking-widest text-gray-300">
+            {{ time4 }}
+        </p>
+
+        <i class="bi bi-cloud-lightning-rain-fill text-4xl text-yellow-400 my-4"></i>
+
+        <p class="text-4xl font-bold text-white">
+            {{ temp4 }}°
+        </p>
+
+        <p class="text-sm text-gray-300 mt-2">
+            💧 {{ hum4 }}%
+        </p>
+
+    </li>
+
+    <!-- Card 5 -->
+    <li class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:scale-105 transition duration-300 text-center">
+
+        <p class="text-sm uppercase tracking-widest text-gray-300">
+            {{ time5 }}
+        </p>
+
+        <i class="bi bi-sun-fill text-4xl text-yellow-300 my-4"></i>
+
+        <p class="text-4xl font-bold text-white">
+            {{ temp5 }}°
+        </p>
+
+        <p class="text-sm text-gray-300 mt-2">
+            💧 {{ hum5 }}%
+        </p>
+
+    </li>
+
+</ul>
+         <div class="grid grid-cols-2 gap-5 mt-8">
+
+    <!-- Wind -->
+    <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:bg-white/20 transition duration-300">
+        <div class="flex items-center gap-4">
+            <i class="bi bi-wind text-3xl text-cyan-300"></i>
+
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-gray-300">
+                    Wind
+                </p>
+
+                <p class="text-2xl font-bold text-white">
+                    {{ wind }}
+                    <span class="text-sm font-normal text-gray-300">km/h</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pressure -->
+    <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:bg-white/20 transition duration-300">
+        <div class="flex items-center gap-4">
+            <i class="bi bi-speedometer2 text-3xl text-green-300"></i>
+
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-gray-300">
+                    Pressure
+                </p>
+
+                <p class="text-2xl font-bold text-white">
+                    {{ pressure }}
+                    <span class="text-sm font-normal text-gray-300">hPa</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visibility -->
+    <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:bg-white/20 transition duration-300">
+        <div class="flex items-center gap-4">
+            <i class="bi bi-eye-fill text-3xl text-yellow-300"></i>
+
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-gray-300">
+                    Visibility
+                </p>
+
+                <p class="text-2xl font-bold text-white">
+                    {{ visibility }}
+                    <span class="text-sm font-normal text-gray-300">m</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Max Temperature -->
+    <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-lg hover:bg-white/20 transition duration-300">
+        <div class="flex items-center gap-4">
+            <i class="bi bi-thermometer-sun text-3xl text-orange-300"></i>
+
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-gray-300">
+                    Max Temp
+                </p>
+
+                <p class="text-2xl font-bold text-white">
+                    {{ MaxTemp }}°
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+        <div class="w-full overflow-x-auto mt-8">
         <canvas id="chart" height="45px"></canvas>
+        </div>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
