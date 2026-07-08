@@ -10,6 +10,7 @@ from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from datetime import datetime,timedelta
 import pytz
+from pathlib import Path
 import os
 API_KEY='c56f60ddbc19bcb9fef03b59fefe9195' #replace with your actual API Key
 BASE_URL='https://api.openweathermap.org/data/2.5/' #Base Url For making API Request 
@@ -93,7 +94,9 @@ def weather_view(request):
     if request.method =='POST':
        city=request.POST.get('city')
        current_weather=get_current_weather(city)
-       csv_path=os.path.join('D:\\Climate ML Project\\weatherProject\\weather.csv')
+       BASE_DIR = Path(__file__).resolve().parent.parent
+       csv_path=BASE_DIR/"weather.csv"
+    #    csv_path=os.path.join('D:\\Climate ML Project\\weatherProject\\weather.csv')
        historical_data=read_historical_data(csv_path)
 #prepare and train the rain prediction model
        X,y,wind_encoder,rain_encoder=prepare_data(historical_data)
